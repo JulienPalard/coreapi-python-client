@@ -118,21 +118,24 @@ class DownloadCodec(BaseCodec):
         content_type = options.get('content_type')
         content_disposition = options.get('content_disposition')
 
+        # The directory where temporary AND final file will reside.
+        # If None, mkstemp will choose another.
+        output_dir = self._download_dir
+
         # Write the download to a temporary .download file.
-        fd, temp_path = tempfile.mkstemp(suffix='.download')
+        fd, temp_path = tempfile.mkstemp(suffix='.download', dir=output_dir)
         file_handle = os.fdopen(fd, 'wb')
         file_handle.write(bytestring)
         file_handle.close()
+
+        # Check which dir mkstemp have choosen.
+        if output_dir is None:
+            output_dir = os.path.dirname(temp_path)
 
         # Determine the output filename.
         output_filename = _get_filename(base_url, content_type, content_disposition)
         if output_filename is None:
             output_filename = os.path.basename(temp_path)
-
-        # Determine the output directory.
-        output_dir = self._download_dir
-        if output_dir is None:
-            output_dir = os.path.dirname(temp_path)
 
         # Determine the full output path.
         output_path = os.path.join(output_dir, output_filename)
