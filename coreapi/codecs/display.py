@@ -30,12 +30,12 @@ def _to_plaintext(node, indent=0, base_url=None, colorize=False, extra_offset=No
         body_indent = '    ' * (indent + 1)
 
         body = '\n'.join([
-            body_indent + colorize_keys(str(key) + ': ') +
-            _to_plaintext(value, indent + 1, base_url=base_url, colorize=colorize, extra_offset=len(str(key)))
+            body_indent + colorize_keys(str(key) + ': ')
+            + _to_plaintext(value, indent + 1, base_url=base_url, colorize=colorize, extra_offset=len(str(key)))
             for key, value in node.data.items()
         ] + [
-            body_indent + colorize_keys(str(key) + '(') +
-            _fields_to_plaintext(value, colorize=colorize) + colorize_keys(')')
+            body_indent + colorize_keys(str(key) + '(')
+            + _fields_to_plaintext(value, colorize=colorize) + colorize_keys(')')
             for key, value in node.links.items()
         ])
 
@@ -51,12 +51,12 @@ def _to_plaintext(node, indent=0, base_url=None, colorize=False, extra_offset=No
         body_indent = '    ' * (indent + 1)
 
         body = '\n'.join([
-            body_indent + colorize_keys(str(key)) + ': ' +
-            _to_plaintext(value, indent + 1, base_url=base_url, colorize=colorize, extra_offset=len(str(key)))
+            body_indent + colorize_keys(str(key)) + ': '
+            + _to_plaintext(value, indent + 1, base_url=base_url, colorize=colorize, extra_offset=len(str(key)))
             for key, value in node.data.items()
         ] + [
-            body_indent + colorize_keys(str(key) + '(') +
-            _fields_to_plaintext(value, colorize=colorize) + colorize_keys(')')
+            body_indent + colorize_keys(str(key) + '(')
+            + _fields_to_plaintext(value, colorize=colorize) + colorize_keys(')')
             for key, value in node.links.items()
         ])
 
@@ -67,8 +67,8 @@ def _to_plaintext(node, indent=0, base_url=None, colorize=False, extra_offset=No
         body_indent = '    ' * (indent + 1)
 
         body = '\n'.join([
-            body_indent + colorize_keys(str(key) + ': ') +
-            _to_plaintext(value, indent + 1, base_url=base_url, colorize=colorize, extra_offset=len(str(key)))
+            body_indent + colorize_keys(str(key) + ': ')
+            + _to_plaintext(value, indent + 1, base_url=base_url, colorize=colorize, extra_offset=len(str(key)))
             for key, value in node.items()
         ])
 
@@ -89,9 +89,9 @@ def _to_plaintext(node, indent=0, base_url=None, colorize=False, extra_offset=No
 
     elif isinstance(node, Link):
         return (
-            colorize_keys('link(') +
-            _fields_to_plaintext(node, colorize=colorize) +
-            colorize_keys(')')
+            colorize_keys('link(')
+            + _fields_to_plaintext(node, colorize=colorize)
+            + colorize_keys(')')
         )
 
     if isinstance(node, string_types) and (extra_offset is not None) and ('\n' in node):

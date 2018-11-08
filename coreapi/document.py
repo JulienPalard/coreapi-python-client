@@ -97,9 +97,9 @@ class Document(itypes.Dict):
     def __eq__(self, other):
         if self.__class__ == other.__class__:
             return (
-                self.url == other.url and
-                self.title == other.title and
-                self._data == other._data
+                self.url == other.url
+                and self.title == other.title
+                and self._data == other._data
             )
         return super(Document, self).__eq__(other)
 
@@ -249,13 +249,13 @@ class Link(itypes.Object):
 
     def __eq__(self, other):
         return (
-            isinstance(other, Link) and
-            self.url == other.url and
-            self.action == other.action and
-            self.encoding == other.encoding and
-            self.transform == other.transform and
-            self.description == other.description and
-            sorted(self.fields, key=lambda f: f.name) == sorted(other.fields, key=lambda f: f.name)
+            isinstance(other, Link)
+            and self.url == other.url
+            and self.action == other.action
+            and self.encoding == other.encoding
+            and self.transform == other.transform
+            and self.description == other.description
+            and sorted(self.fields, key=lambda f: f.name) == sorted(other.fields, key=lambda f: f.name)
         )
 
     def __repr__(self):
@@ -291,9 +291,9 @@ class Error(itypes.Dict):
 
     def __eq__(self, other):
         return (
-            isinstance(other, Error) and
-            self.title == other.title and
-            self._data == other._data
+            isinstance(other, Error)
+            and self.title == other.title
+            and self._data == other._data
         )
 
     @property

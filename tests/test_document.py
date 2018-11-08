@@ -205,12 +205,12 @@ def test_set_in():
     insert = Object({'xyz': 789})
 
     assert (
-        nested.set_in(['key', 0], insert) ==
-        {'key': [{'xyz': 789}, {'def': 456}], 'other': 0}
+        nested.set_in(['key', 0], insert)
+        == {'key': [{'xyz': 789}, {'def': 456}], 'other': 0}
     )
     assert (
-        nested.set_in(['key'], insert) ==
-        {'key': {'xyz': 789}, 'other': 0}
+        nested.set_in(['key'], insert)
+        == {'key': {'xyz': 789}, 'other': 0}
     )
     assert nested.set_in([], insert) == {'xyz': 789}
 
